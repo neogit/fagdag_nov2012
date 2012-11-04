@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>reveal.js - The HTML Presentation Framework</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/custom.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+        document.write('<link rel="stylesheet" href="css/print/' + ( window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">');
+    </script>
+
+    <script src="lib/js/jquery-1.8.2.min.js"></script>
+    <script src="lib/js/knockout-2.2.0.js"></script>
+    <script src="lib/codemirror/lib/codemirror.js"></script>
+    <script src="lib/codemirror/mode/javascript/javascript.js"></script>
+    <script src="lib/codemirror/mode/xml/xml.js"></script>
+    <script src="lib/codemirror/mode/css/css.js"></script>
+    <script src="lib/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+
+    <link rel="stylesheet" href="lib/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" href="lib/codemirror/theme/elegant.css">
+    <link rel="stylesheet" href="css/presentation.css">
+
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+        <section>
+            <h2>Knockout.js</h2>
+
+            <p><strong>For dealing with complex UI</strong></p>
+            <br/>
+
+            <p>Arild Nilsen</p>
+
+            <p>November, 2012</p>
+
+        </section>
+
+        <section>
+            <h2>Data bindings without Knockout</h2>
+
+            <div class="example"></div>
+            <div class="html-code"">
+<div id="name"></div>
+<input id="nameInput" type="text" />
+            </div>
+            <div class="js-code">
+var person = {
+    name: "Ola Nordmann",
+    age: 25
+};
+
+$('#name').text(person.name);
+$('#nameInput').val(person.name).change(function() {
+    person.name = this.value;
+    $('#name').text(this.value);
+});
+            </div>
+        </section>
+        
+        <section>
+        <section>
+            <h2>Knockout <code>observables</code></h2>
+
+            <div class="example"></div>
+            <div class="html-code">
+<div id="name"></div>
+<input id="nameInput" type="text" />
+            </div>
+            <div class="js-code">
+var person = {
+    name: ko.observable('Ola Nordmann'),
+    age: 25
+};
+
+ko.applyBindings(person);
+            </div>
+        </section>
+        
+        
+        <section>
+            <h2>Knockout <code>observables</code></h2>
+
+            <div class="example"></div>
+            <div class="html-code">
+<div data-bind="text: formatted"></div>
+<input data-bind="value: name" type="text">
+            </div>
+            <div class="js-code">
+var person = {
+    name: ko.observable('Ola Nordmann'),
+    age: 25
+};
+
+person.formatted = ko.computed(function() {
+    return person.name() + '(' + person.age + ')';
+});
+
+ko.applyBindings(person);
+            </div>
+        </section>
+        </section>
+
+        
+        <section>
+        <section>
+            <h2><code>observables</code> - alternative syntax</h2>
+
+            <div class="example"></div>
+            <div class="html-code">
+<div data-bind="text: formatted"></div>
+<input data-bind="value: name" type="text" />
+            </div>
+            <div class="js-code">
+var Person = function(data) {
+    this.name = ko.observable(data.name);
+    this.age = ko.observable(data.age);
+    
+    this.formatted = ko.computed(function() {
+    	return this.name() + '(' + this.age() + ')';
+    }, this);
+};
+
+var personFromServer = {
+    name: 'Ola Nordmann',
+    age: 25
+};
+
+ko.applyBindings(new Person(personFromServer));
+            </div>
+        </section>
+        <section>
+            <h2><code>observables</code> - alternative syntax</h2>
+
+            <div class="example"></div>
+            <div class="html-code">
+<div data-bind="text: formatted"></div>
+<input data-bind="value: name" type="text" />
+            </div>
+            <div class="js-code">
+var Person = function(data) {
+	var self = this;
+    self.name = ko.observable(data.name);
+    self.age = ko.observable(data.age);
+    
+    self.formatted = ko.computed(function() {
+    	return self.name() + '(' + self.age() + ')';
+    });
+};
+
+var personFromServer = {
+    name: 'Ola Nordmann',
+    age: 25
+};
+
+ko.applyBindings(new Person(personFromServer));
+            </div>
+        </section>
+        </section>
+
+
+        <section>
+        <section>
+            <h2>Knockout <code>foreach</code></h2>
+
+            <div class="example"></div>
+            <div class="html-code">
+<h4>People</h4>
+<ul data-bind="foreach: people">
+    <li>
+    	Name at position
+    	<span data-bind="text: $index"></span>:
+        <span data-bind="text: name"></span>
+    </li>
+</ul>            
+			</div>
+            <div class="js-code">
+function ViewModel() {
+    var self = this;
+ 
+    self.people = ko.observableArray([
+        new Person({ name: 'Ola Nordmann', age: 34}),
+        new Person({ name: 'Kari Nordmann', age: 38}),
+        new Person({ name: 'Emma Olsen',  age: 20})
+    ]);
+}
+ 
+ko.applyBindings(new ViewModel());
+            </div>
+            <div class="js-code-hidden">
+var Person = function(data) {
+	var self = this;
+    self.name = ko.observable(data.name);
+    self.age = ko.observable(data.age);
+    
+    self.formatted = ko.computed(function() {
+    	return self.name() + '(' + self.age() + ')';
+    });
+};
+            </div>
+        </section>
+        <section>
+            <h2>Knockout <code>foreach</code></h2>
+
+            <div class="example"></div>
+            <div class="html-code">
+<h4>People</h4>
+<ul data-bind="foreach: people">
+<li>
+	Name at position 
+	<span data-bind="text: $index"></span>:
+	<span data-bind="text: name"></span>
+	<button data-bind="click: $parent.removePerson">
+		Remove
+	</button>
+</li>
+</ul>
+<button data-bind="click: addPerson">Add</button>
+            </div>
+            <div class="js-code">
+function ViewModel() {
+    var self = this;
+ 
+    self.people = ko.observableArray([
+        new Person({ name: 'Ola Nordmann', age: 34}),
+        new Person({ name: 'Kari Nordmann', age: 38}),
+        new Person({ name: 'Emma Olsen',  age: 20})
+    ]);
+    
+    self.addPerson = function() {
+        self.people.push(new Person({ name: 'Arild Nilesn', age: 25 }));
+    };
+    
+    self.removePerson = function() {
+        self.people.remove(this);
+    }
+}
+
+ko.applyBindings(new ViewModel());
+            </div>
+			<div class="js-code-hidden">
+var Person = function(data) {
+	var self = this;
+    self.name = ko.observable(data.name);
+    self.age = ko.observable(data.age);
+    
+    self.formatted = ko.computed(function() {
+    	return self.name() + '(' + self.age() + ')';
+    });
+};
+            </div>
+            
+        </section>
+        </section>
+
+
+        <section>
+            <h2>Why did Flash conquer the market?</h2>
+            <ul>
+                <li class="fragment">Flash is more than just video</li>
+                <li class="fragment">Tools and codecs</li>
+                <li class="fragment">2005: Google videos and Youtube launched using Flash</li>
+            </ul>
+        </section>
+    </div>
+
+</div>
+
+<iframe id="sandbox" style="display: none;"></iframe>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.min.js"></script>
+
+<script>
+	
+	var Slide = function() {
+		var jsEditors = [];
+		var htmlEditors = [];
+		
+		var init = function() {
+			$.each($('.slides .example'), function(index, el) {
+				el.innerHTML = '<div class="left">HTML<div class="html"></div>JavaScript<div class="js"></div></div><div class="right">Result<iframe scrolling="no" src="sandbox.html"></iframe></div>';
+			});	
+		}();
+		
+		var getSlideEl = function() {
+			return Reveal.getCurrentSlide();
+		};
+		
+		var getSlideId = function () {
+			var indices = Reveal.getIndices();
+			return indices.v + '-' + indices.h;
+		};
+		
+		var isExampleInitialized = function() {
+			return $('.CodeMirror', getSlideEl()).length > 0;	
+		};
+		
+	    var getInitialJsCode = function() {
+	    	return $('.js-code', getSlideEl()).text();
+	    };
+	    
+	    var getInitialHtmlCode = function() {
+	    	return $('.html-code', getSlideEl()).html();
+	    };
+	    
+	    var createEditors = function() {
+	    	var textarea = $('.example .js', getSlideEl());
+	    	var editor = CodeMirror.fromTextArea(textarea.get(0), {
+                mode:"javascript",
+                autoClearEmptyLines:true,
+                indentUnit:4,
+                indentWithTabs:true
+            });
+	    	editor.setValue(getInitialJsCode());
+	    	jsEditors[getSlideId()] = editor;
+	    	
+	    	textarea = $('.example .html', getSlideEl());
+	    	editor = CodeMirror.fromTextArea(textarea.get(0), {
+                mode:"htmlmixed",
+                autoClearEmptyLines:true,
+                indentUnit:4,
+                indentWithTabs:true
+            });
+	    	editor.setValue(getInitialHtmlCode());
+	    	htmlEditors[getSlideId()] = editor;
+	    };
+	    
+	    var hasHiddenJs = function() {
+	    	return $('.js-code-hidden', getSlideEl()).length > 0;	
+	    }
+	    
+	    var getHiddenJs = function() {
+	    	return $('.js-code-hidden', getSlideEl()).text();	
+	    }	    
+	    
+		return {
+		    hasExample: function() {
+		        if ($('.example', getSlideEl()).length > 0)
+		            return true;
+		        return false;
+		    },
+		    initializeExample: function() {
+		    	if (isExampleInitialized())
+		    		return;
+		    	createEditors();
+		    }, 
+		    getJsAsString: function() {
+		    	var jsStr = jsEditors[getSlideId()].getValue();
+		    	if (hasHiddenJs())
+		    		jsStr = getHiddenJs() + jsStr;
+				return jsStr;
+		    },
+		    getHtmlAsString: function() {
+		    	return htmlEditors[getSlideId()].getValue();
+		    },
+		    getIframeWindow: function() {
+		    	return $('.example iframe', getSlideEl()).get(0).contentWindow;
+		    }
+		}
+	}();
+	
+	var Sandbox = function(iframeWindow) {
+		return {
+			setHtml: function(html) {
+				$('body', iframeWindow.document).html(html);
+			},
+			executeJs: function(jsStr) {
+				iframeWindow.eval(jsStr);	
+			}
+		};
+	};
+	
+	function runExampleOnCurrentSlide() {
+		if (Slide.hasExample()) {
+        	Slide.initializeExample();
+        	var sandbox = new Sandbox(Slide.getIframeWindow());
+        	sandbox.setHtml(Slide.getHtmlAsString());
+        	sandbox.executeJs(Slide.getJsAsString());
+        }		
+	}
+
+	$(document).keydown(function(e){
+		if (e.ctrlKey && e.which == 13) {
+			runExampleOnCurrentSlide();
+	    }
+	});
+	
+    Reveal.addEventListener('slidechanged', function (event) {
+        // event.previousSlide, event.currentSlide, event.indexh, event.indexv
+		runExampleOnCurrentSlide();
+    });
+
+
+    // Full list of configuration options available here:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls:true,
+        progress:true,
+        history:true,
+
+        theme:Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition:Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/none
+
+// Optional libraries used to extend on reveal.js
+        dependencies:[
+            { src:'lib/js/highlight.js', async:true, callback:function () {
+                window.hljs.initHighlightingOnLoad();
+            } },
+            { src:'lib/js/classList.js', condition:function () {
+                return !document.body.classList;
+            } },
+            { src:'lib/js/showdown.js', condition:function () {
+                return !!document.querySelector('[data-markdown]');
+            } },
+            { src:'lib/js/data-markdown.js', condition:function () {
+                return !!document.querySelector('[data-markdown]');
+            } },
+            { src:'plugin/zoom-js/zoom.js', async:true, condition:function () {
+                return !!document.body.classList;
+            } },
+            { src:'plugin/notes/notes.js', async:true, condition:function () {
+                return !!document.body.classList;
+            } }
+        ]
+    });
+</script>
+
+</body>
+</html>
