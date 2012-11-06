@@ -1,13 +1,5 @@
 @CHARSET "ISO-8859-1";
 
-section ul li {
-    margin-top: 1em;
-}
-
-section ul {
-    list-style-type: none !important;
-}
-
 #outdated_technologies {
     padding-top: 50px;
     height: 200px;
