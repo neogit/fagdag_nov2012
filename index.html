@@ -61,6 +61,17 @@
         </section>
 
         <section>
+            <h2>Outline</h2>
+            <ul>
+                <li>Key points</li>
+                <li>Model View ViewModel (MVVM)</li>
+                <li>Knockout by example</li>
+                <li>Code review Prosjektbanken</li>
+                <li>Summary</li>
+            </ul>
+        </section>
+
+        <section>
             <h2>Data bindings without Knockout</h2>
 
             <div class="example"></div>
@@ -372,7 +383,11 @@ ko.applyBindings(person);
 <script src="js/reveal.min.js"></script>
 
 <script>
-	
+
+    var Outline = function() {
+        var bullets = ['Key points', 'Model View ViewModel (MVVM)', 'Knockout by example', 'Code review Prosjektbanken', 'Summary'];
+    };
+
 	var Slide = function() {
 		var jsEditors = [];
 		var htmlEditors = [];
