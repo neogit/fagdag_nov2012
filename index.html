@@ -278,6 +278,82 @@ var Person = function(data) {
         </section>
 
 
+		<section>
+            <h2>DOM access with Knockout</h2>
+
+            <div class="example"></div>
+            <div class="html-code">
+<div id="name" data-bind="nameFadeVisible: name"></div>
+<input data-bind="value: name" type="text">
+            </div>
+            <div class="js-code">
+var person = {
+    name: ko.observable('Ola Nordmann'),
+    age: 25
+};
+
+person.nameFadeVisible = ko.computed(function() {
+	var element = $('#name');
+	element.hide().text(person.name()).fadeIn(2000);
+});
+
+ko.applyBindings(person);
+
+            </div>
+        </section>
+
+
+		<section>
+		<section>
+            <h2>Knockout <code>custom bindings</code></h2>
+
+            <div class="example"></div>
+            <div class="html-code">
+<div data-bind="text: name"></div>
+<input data-bind="value: name" type="text">
+            </div>
+            <div class="js-code">
+var person = {
+    name: ko.observable('Ola Nordmann'),
+    age: 25
+};
+
+ko.bindingHandlers.fadeVisible = {
+    update: function(element, valueAccessor) {
+        var value = ko.utils.unwrapObservable(valueAccessor());
+    }
+ };
+ 
+ko.applyBindings(person);
+
+            </div>
+        </section>
+		<section>
+            <h2>Knockout <code>custom bindings</code></h2>
+
+            <div class="example"></div>
+            <div class="html-code">
+<div data-bind="fadeVisible: name"></div>
+<input data-bind="value: name" type="text">
+            </div>
+            <div class="js-code">
+var person = {
+    name: ko.observable('Ola Nordmann'),
+    age: 25
+};
+
+ko.bindingHandlers.fadeVisible = {
+    update: function(element, valueAccessor) {
+        var value = ko.utils.unwrapObservable(valueAccessor());
+        $(element).hide().text(value).fadeIn(2000);
+    }
+ };
+ 
+ko.applyBindings(person);
+		</section>
+		</section>
+
+
         <section>
             <h2>Why did Flash conquer the market?</h2>
             <ul>
