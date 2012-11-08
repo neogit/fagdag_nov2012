@@ -21,11 +21,6 @@ body {
     color: #444444;
 }
 
-.slides {
-	text-align: left !important;
-	
-}
-
 ::selection {
     color: white;
     background: rgba(0, 0, 0, 0.99);
@@ -153,6 +148,13 @@ body {
 .slides ul li {
     line-height: 1.5em !important;
     margin-top: 0.5em;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.slides ul {
+	margin-left: 0;
+    padding-left: 0;
 }
 
 section ul {
