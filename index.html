@@ -81,12 +81,22 @@
         </section>
 
         <section>
+            <h2>Model View ViewModel (MVVM)</h2>
+
+            <div id="boxes">
+                <div id="view"><strong>View</strong></div>
+                <div id="viewModel"><strong>ViewModel</strong></div>
+                <div id="model"><strong>Model</strong></div>
+            </div>
+        </section>
+
+        <section>
             <h2>Data bindings without Knockout</h2>
 
             <div class="example"></div>
             <div class="html-code"">
 <div id="name"></div>
-<input id="nameInput" type="text" />
+<input id="nameInput" />
             </div>
             <div class="js-code">
 var person = {
@@ -108,8 +118,8 @@ $('#nameInput').val(person.name).change(function() {
 
             <div class="example"></div>
             <div class="html-code">
-<div id="name"></div>
-<input id="nameInput" type="text" />
+<div data-bind="text: name"></div>
+<input data-bind="value: name">
             </div>
             <div class="js-code">
 var person = {
@@ -128,7 +138,7 @@ ko.applyBindings(person);
             <div class="example"></div>
             <div class="html-code">
 <div data-bind="text: formatted"></div>
-<input data-bind="value: name" type="text">
+<input data-bind="value: name">
             </div>
             <div class="js-code">
 var person = {
@@ -153,7 +163,7 @@ ko.applyBindings(person);
             <div class="example"></div>
             <div class="html-code">
 <div data-bind="text: formatted"></div>
-<input data-bind="value: name" type="text" />
+<input data-bind="value: name" />
             </div>
             <div class="js-code">
 var Person = function(data) {
@@ -179,7 +189,7 @@ ko.applyBindings(new Person(personFromServer));
             <div class="example"></div>
             <div class="html-code">
 <div data-bind="text: formatted"></div>
-<input data-bind="value: name" type="text" />
+<input data-bind="value: name" />
             </div>
             <div class="js-code">
 var Person = function(data) {
@@ -303,8 +313,8 @@ var Person = function(data) {
 
             <div class="example"></div>
             <div class="html-code">
-<div id="name" data-bind="nameFadeVisible: name"></div>
-<input data-bind="value: name" type="text">
+<div id="name" data-bind="text: nameFadeVisible"></div>
+<input data-bind="value: name">
             </div>
             <div class="js-code">
 var person = {
@@ -313,8 +323,8 @@ var person = {
 };
 
 person.nameFadeVisible = ko.computed(function() {
-	var element = $('#name');
-	element.hide().text(person.name()).fadeIn(2000);
+    $('#name').hide().fadeIn(2000);
+    return person.name();
 });
 
 ko.applyBindings(person);
@@ -330,7 +340,7 @@ ko.applyBindings(person);
             <div class="example"></div>
             <div class="html-code">
 <div data-bind="text: name"></div>
-<input data-bind="value: name" type="text">
+<input data-bind="value: name">
             </div>
             <div class="js-code">
 var person = {
@@ -354,7 +364,7 @@ ko.applyBindings(person);
             <div class="example"></div>
             <div class="html-code">
 <div data-bind="fadeVisible: name"></div>
-<input data-bind="value: name" type="text">
+<input data-bind="value: name">
             </div>
             <div class="js-code">
 var person = {
@@ -375,18 +385,37 @@ ko.applyBindings(person);
 
 
         <section>
-            <h2>Why did Flash conquer the market?</h2>
+            <h2>Benefits</h2>
             <ul>
-                <li class="fragment">Flash is more than just video</li>
-                <li class="fragment">Tools and codecs</li>
-                <li class="fragment">2005: Google videos and Youtube launched using Flash</li>
+                <li class="fragment">Does one thing well: rich UIs</li>
+                <li class="fragment">Extensive documentation. Interactive examples.</li>
             </ul>
         </section>
-    </div>
 
+        <section>
+            <h2>Challenges</h2>
+            <ul>
+                <li class="fragment">Logic in views</li>
+                <li class="fragment">Guidelines for structuring ViewModel?</li>
+                <li class="fragment">Performance. Dependency resolving.</li>
+                <li class="fragment">Difficult to debug</li>
+                <li class="fragment">Overkill for smaller applications</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Questions?</h2>
+            <div>
+                <p><strong>Presentation available at:</strong></p>
+                <a href="http://arild.github.com/fagdag_nov2012">
+                    <strong>arild.github.com/fagdag_nov2012</strong>
+                </a>
+            </div>
+        </section>
+
+    </div>
 </div>
 
-<iframe id="sandbox" style="display: none;"></iframe>
 
 <script src="lib/js/head.min.js"></script>
 <script src="js/reveal.min.js"></script>
