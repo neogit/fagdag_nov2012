@@ -80,14 +80,37 @@
         	</ul>
         </section>
 
-        <section>
-            <h2>Model View ViewModel (MVVM)</h2>
-
-            <div id="boxes">
-                <div id="view"><strong>View</strong></div>
-                <div id="viewModel"><strong>ViewModel</strong></div>
-                <div id="model"><strong>Model</strong></div>
+        <section class="slide">
+            <h2>Model View ViewModel</h2>
+            <img alt="" src="mvvm.png">
+            <div class="fragment">
+                <p><strong>View</strong><p>
+                <p>Interactive UI that represent the state of a ViewModel</p>
+                <p>View in Knockout = HTML + declarative bindings</p>
             </div>
+            <br>
+            <div class="fragment">
+                <p><strong>ViewModel</strong><p>
+                <p>Transform data and mediate commands</p>
+                <p>ViewModel in Knockout = JavaScript objects with no knowledge of HTML</p>
+            </div>
+            <br>
+            <div class="fragment">
+                <p><strong>Model</strong></p>
+                <p>Represents domain specific data</p>
+                <p>Does not influence how data appears</p>
+            </div>
+        </section>
+
+
+        <!--<section>-->
+            <!--<h2>Model View ViewModel (MVVM)</h2>-->
+
+            <!--<div id="boxes">-->
+                <!--<div id="view"><strong>View</strong></div>-->
+                <!--<div id="viewModel"><strong>ViewModel</strong></div>-->
+                <!--<div id="model"><strong>Model</strong></div>-->
+            <!--</div>-->
         </section>
 
         <section>
@@ -399,7 +422,14 @@ ko.applyBindings(person);
                 <li class="fragment">Guidelines for structuring ViewModel?</li>
                 <li class="fragment">Performance. Dependency resolving.</li>
                 <li class="fragment">Difficult to debug</li>
-                <li class="fragment">Overkill for smaller applications</li>
+                <li class="fragment">Difficult to structure larger application</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Knockout vs Backbone</h2>
+            <ul>
+                <li class="fragment">Solve different problems</li>
             </ul>
         </section>
 
