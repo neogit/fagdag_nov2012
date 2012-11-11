@@ -27,16 +27,15 @@
 
 .slides {
     max-width: 1024px !important;
-    left: 40% !important;
 }
 
 .example .left {
     float: left;
-	width: 800px;
+	width: 810px;
 }
 
 .example .right {
-	margin-left: 830px;
+	margin-left: 840px;
 	width: 180px;
 }
 

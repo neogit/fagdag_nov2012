@@ -146,7 +146,7 @@ $('#nameInput').val(person.name).change(function() {
             </div>
             <div class="js-code">
 var person = {
-    name: ko.observable('Ola Nordmann'),
+    name: 'Ola Nordmann',
     age: 25
 };
 
@@ -254,12 +254,12 @@ ko.applyBindings(new Person(personFromServer));
             <div class="js-code">
 function ViewModel() {
     var self = this;
- 
-    self.people = ko.observableArray([
+
+    self.people = [
         new Person({ name: 'Ola Nordmann', age: 34}),
         new Person({ name: 'Kari Nordmann', age: 38}),
         new Person({ name: 'Emma Olsen',  age: 20})
-    ]);
+    ];
 }
  
 ko.applyBindings(new ViewModel());
@@ -269,7 +269,7 @@ var Person = function(data) {
 	var self = this;
     self.name = ko.observable(data.name);
     self.age = ko.observable(data.age);
-    
+
     self.formatted = ko.computed(function() {
     	return self.name() + '(' + self.age() + ')';
     });
@@ -297,17 +297,17 @@ var Person = function(data) {
             <div class="js-code">
 function ViewModel() {
     var self = this;
- 
+
     self.people = ko.observableArray([
         new Person({ name: 'Ola Nordmann', age: 34}),
         new Person({ name: 'Kari Nordmann', age: 38}),
         new Person({ name: 'Emma Olsen',  age: 20})
     ]);
-    
+
     self.addPerson = function() {
         self.people.push(new Person({ name: 'Arild Nilesn', age: 25 }));
     };
-    
+
     self.removePerson = function() {
         self.people.remove(this);
     }
