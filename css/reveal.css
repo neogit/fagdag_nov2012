@@ -496,18 +496,14 @@ body {
  *********************************************/
 
 .reveal .slides {
-	position: absolute;
-	max-width: 900px;
-	width: 80%;
-	height: 60%;
-	left: 50%;
-	top: 40%;
-	margin-top: -320px;
-	padding: 20px 0px;
+    width: 100%;
+    left: 0;
+    top: 0;
+    -moz-box-sizing: border-box;
+    padding: 0 48px;
+    min-height: 100%;
 	overflow: visible;
 	z-index: 1;
-
-	text-align: left;
 
 	-webkit-transition: -webkit-perspective .4s ease;
 	   -moz-transition: -moz-perspective .4s ease;
@@ -531,7 +527,12 @@ body {
 	display: none;
 	position: absolute;
 	width: 100%;
-	min-height: 600px;
+    width: 100%;
+    left: 0;
+    top: 0;
+    -moz-box-sizing: border-box;
+    padding: 0 48px;
+    min-height: 100%;
 
 	z-index: 10;
 
@@ -554,7 +555,7 @@ body {
 }
 
 .reveal .slides>section {
-	margin-left: -60%;
+	/*margin-left: -60%;*/
 }
 
 
