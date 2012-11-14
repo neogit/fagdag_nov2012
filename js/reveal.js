@@ -457,6 +457,7 @@ var Reveal = (function(){
 
 		// Only proceed if enabled in config
 		if( config.overview ) {
+            $('.reveal .slides').css('position', 'absolute');
 
 			dom.wrapper.classList.add( 'overview' );
 
@@ -512,7 +513,7 @@ var Reveal = (function(){
 
 		// Only proceed if enabled in config
 		if( config.overview ) {
-
+                $('.reveal .slides').css('position', '');
 			dom.wrapper.classList.remove( 'overview' );
 
 			// Select all slides

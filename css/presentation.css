@@ -48,6 +48,10 @@
 	display: none;
 }
 
+.prosjektbanken img {
+    border: 2px solid;
+}
+
 #boxes {
     /*height: 100%; width: 100%; position: relative;*/
 

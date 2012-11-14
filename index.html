@@ -406,9 +406,27 @@ ko.applyBindings(person);
 		</section>
 		</section>
 
-        <section>
-            <h2>Code review Prosjektbanken</h2>
-            An updated image of front page...
+        <section class="prosjektbanken">
+            <section>
+                <h2>Prosjektbanken - Code review </h2>
+                <img src="prosjektbank_images/1.png"/>
+            </section>
+            <section>
+                <h2>Top-level view models</h2>
+                <img src="prosjektbank_images/2.png"/>
+            </section>
+            <section>
+                <h2>Functionality in facet box</h2>
+                <img src="prosjektbank_images/3.png"/>
+            </section>
+            <section>
+                <h2>Sub-level view models</h2>
+                <img src="prosjektbank_images/4.png"/>
+            </section>
+            <section>
+                <h2>Sub-level view models</h2>
+                <img src="prosjektbank_images/5.png"/>
+            </section>
         </section>
 
         <section>
@@ -428,6 +446,23 @@ ko.applyBindings(person);
                 <li class="fragment">Difficult to structure larger applications. Requires discipline.</li>
                 <li class="fragment">Performance. Dependency resolving.</li>
                 <li class="fragment">Difficult to debug</li>
+                <li class="fragment">
+                    <a href="http://www.lorefnon.com/blog/2012/08/11/debunking-ko-myths/">
+                        <q cite="">
+                            Debunking 10 common KnockoutJS myths</q>
+                    </a>
+                    <p style="padding-left: 90px;">Ruby aficionado, August 2012</p>
+                </li>
+
+            </ul>
+        </section>
+
+        <section>
+            <h2>Test-driven development with Knockout</h2>
+            <ul>
+                <li class="fragment">ViewModels: Must be tested. DOM access not required.</li>
+                <li class="fragment">Views: Might be tested. DOM access required.</li>
+                <li class="fragment">Asynchronous tests - waiting for Knockout to update DOM</li>
             </ul>
         </section>
 
@@ -441,9 +476,9 @@ ko.applyBindings(person);
                     </a>
                     <p style="text-align: center;">Derick Bailey, November 2011</p>
                 </li>
-                <li class="fragment">Backbone (framework): General tools for structure</li>
-                <li class="fragment">Kncokout (library): Specific tool for UI</li>
-                <li class="fragment">The best of both worlds: Knockback.js</li>
+                <li class="fragment">Backbone: General tools for structure</li>
+                <li class="fragment">Knockout: Specific tool for dynamic UI</li>
+                <li class="fragment">Combination of the two: Backbone + Knockback.js</li>
             </ul>
         </section>
 
@@ -462,7 +497,7 @@ ko.applyBindings(person);
 
 
 <script src="lib/js/head.min.js"></script>
-<script src="js/reveal.min.js"></script>
+<script src="js/reveal.js"></script>
 
 <script>
 
@@ -549,7 +584,19 @@ ko.applyBindings(person);
 		    },
 		    getIframeWindow: function() {
 		    	return $('.example iframe', getSlideEl()).get(0).contentWindow;
-		    }
+		    },
+            focusSlide: function() {
+                $('.present').focus();
+            },
+            focusJsEditor: function() {
+                jsEditors[getSlideId()].focus();
+            },
+            focusHtmlEditor: function() {
+                htmlEditors[getSlideId()].focus();
+            },
+            focusResult: function() {
+                $('.present iframe input', getSlideEl()).focus();
+            }
 		}
 	}();
 	
@@ -577,6 +624,42 @@ ko.applyBindings(person);
 		if (e.ctrlKey && e.which == 13) {
 			runExampleOnCurrentSlide();
 	    }
+        else if (e.shiftKey && e.altKey && e.which == 37) {
+            Reveal.navigateLeft();
+        }
+        else if (e.shiftKey && e.altKey && e.which == 39) {
+            Reveal.navigateRight();
+        }
+        else if (e.shiftKey && e.altKey && e.which == 38) {
+            Slide.focusHtmlEditor();
+        }
+        else if (e.shiftKey && e.altKey && e.which == 40) {
+            Slide.focusJsEditor();
+        }
+        else if (e.shiftKey && e.altKey && e.which == 82) {
+            console.log('result');
+            $('input', Slide.getIframeWindow().document).focus();
+        }
+//        // Escape
+//        else if (e.keyCode == 27) {
+//            console.log('focus slide');
+//            Slide.focusSlide();
+//        }
+//        // alt + s
+//        //else if (e.ctrlKey && e.altKey && e.which == 83) {
+//        else if (e.altKey && e.shiftKey && e.which == 83) {
+//            Slide.focusJsEditor();
+//        }
+//        // alt + h
+////        else if (e.ctrlKey && e.altKey && e.which == 72) {
+//        else if (e.which == 91 && e.which == 72) {
+//            console.log('focus js editor');
+//            Slide.focusJsEditor();
+//        }
+//        // alt + r
+//        else if (e.ctrlKey && e.altKey && e.which == 82) {
+//            Slide.focusJsEditor();
+//        }
 	});
 	
     Reveal.addEventListener('slidechanged', function (event) {
