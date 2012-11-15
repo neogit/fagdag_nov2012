@@ -160,7 +160,11 @@ var Reveal = (function(){
 		// Presentation background element
 		if( !dom.wrapper.querySelector( '.state-background' ) ) {
 			var backgroundElement = document.createElement( 'div' );
-			backgroundElement.classList.add( 'state-background' );
+			// REMOVAL: FIX FOR CHROME
+            if (navigator.userAgent.indexOf("Firefox") != -1) {
+                console.log('firefox');
+			    backgroundElement.classList.add( 'state-background' );
+            }
 			dom.wrapper.appendChild( backgroundElement );
 		}
 
