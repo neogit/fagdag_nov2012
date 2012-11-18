@@ -640,29 +640,8 @@ ko.applyBindings(person);
             Slide.focusJsEditor();
         }
         else if (e.shiftKey && e.altKey && e.which == 82) {
-            console.log('result');
             $('input', Slide.getIframeWindow().document).focus();
         }
-//        // Escape
-//        else if (e.keyCode == 27) {
-//            console.log('focus slide');
-//            Slide.focusSlide();
-//        }
-//        // alt + s
-//        //else if (e.ctrlKey && e.altKey && e.which == 83) {
-//        else if (e.altKey && e.shiftKey && e.which == 83) {
-//            Slide.focusJsEditor();
-//        }
-//        // alt + h
-////        else if (e.ctrlKey && e.altKey && e.which == 72) {
-//        else if (e.which == 91 && e.which == 72) {
-//            console.log('focus js editor');
-//            Slide.focusJsEditor();
-//        }
-//        // alt + r
-//        else if (e.ctrlKey && e.altKey && e.which == 82) {
-//            Slide.focusJsEditor();
-//        }
 	});
 	
     Reveal.addEventListener('slidechanged', function (event) {

@@ -162,7 +162,6 @@ var Reveal = (function(){
 			var backgroundElement = document.createElement( 'div' );
 			// REMOVAL: FIX FOR CHROME
             if (navigator.userAgent.indexOf("Firefox") != -1) {
-                console.log('firefox');
 			    backgroundElement.classList.add( 'state-background' );
             }
 			dom.wrapper.appendChild( backgroundElement );
